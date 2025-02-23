@@ -2,7 +2,8 @@ use bytemuck::Pod;
 use solana_program::{account_info::AccountInfo, program_error::ProgramError, pubkey::Pubkey};
 
 use crate::{
-    trace, AccountDeserialize, AccountInfoValidation, AsAccount, CloseAccount, Discriminator, LamportTransfer
+    trace, AccountDeserialize, AccountInfoValidation, AsAccount, CloseAccount, Discriminator,
+    LamportTransfer,
 };
 
 #[cfg(feature = "spl")]
@@ -14,16 +15,22 @@ use crate::{AccountValidation, AsSplToken};
 impl AccountInfoValidation for AccountInfo<'_> {
     #[track_caller]
     fn is_empty(&self) -> Result<&Self, ProgramError> {
-        if !self.data_is_empty() { 
-            return Err(trace("Account already initialized", ProgramError::AccountAlreadyInitialized));
+        if !self.data_is_empty() {
+            return Err(trace(
+                "Account already initialized",
+                ProgramError::AccountAlreadyInitialized,
+            ));
         }
         Ok(self)
     }
 
     #[track_caller]
     fn is_executable(&self) -> Result<&Self, ProgramError> {
-        if !self.executable { 
-            return Err(trace("Account is not executable", ProgramError::InvalidAccountData));
+        if !self.executable {
+            return Err(trace(
+                "Account is not executable",
+                ProgramError::InvalidAccountData,
+            ));
         }
         Ok(self)
     }
@@ -35,21 +42,25 @@ impl AccountInfoValidation for AccountInfo<'_> {
 
     #[track_caller]
     fn is_signer(&self) -> Result<&Self, ProgramError> {
-        if !self.is_signer { 
-            return Err(trace("Account is not a signer", ProgramError::MissingRequiredSignature));
+        if !self.is_signer {
+            return Err(trace(
+                "Account is not a signer",
+                ProgramError::MissingRequiredSignature,
+            ));
         }
         Ok(self)
     }
 
     #[track_caller]
     fn is_sysvar(&self, sysvar_id: &Pubkey) -> Result<&Self, ProgramError> {
-        self.has_owner(&solana_program::sysvar::ID)?.has_address(sysvar_id)
+        self.has_owner(&solana_program::sysvar::ID)?
+            .has_address(sysvar_id)
     }
 
     #[track_caller]
     fn is_type<T: Discriminator>(&self, program_id: &Pubkey) -> Result<&Self, ProgramError> {
         self.has_owner(program_id)?;
-        if self.try_borrow_data()?[0].ne(&T::discriminator()) { 
+        if self.try_borrow_data()?[0].ne(&T::discriminator()) {
             return Err(trace(
                 format!("Account is not of type {}", T::discriminator()).as_str(),
                 ProgramError::InvalidAccountData,
@@ -60,24 +71,33 @@ impl AccountInfoValidation for AccountInfo<'_> {
 
     #[track_caller]
     fn is_writable(&self) -> Result<&Self, ProgramError> {
-        if !self.is_writable { 
-            return Err(trace("Account is not writable",  ProgramError::MissingRequiredSignature));
+        if !self.is_writable {
+            return Err(trace(
+                "Account is not writable",
+                ProgramError::MissingRequiredSignature,
+            ));
         }
         Ok(self)
     }
 
     #[track_caller]
     fn has_address(&self, address: &Pubkey) -> Result<&Self, ProgramError> {
-        if self.key.ne(&address) { 
-            return Err(trace("Account has invalid address",  ProgramError::InvalidAccountData));
+        if self.key.ne(&address) {
+            return Err(trace(
+                "Account has invalid address",
+                ProgramError::InvalidAccountData,
+            ));
         }
         Ok(self)
     }
-    
+
     #[track_caller]
     fn has_owner(&self, owner: &Pubkey) -> Result<&Self, ProgramError> {
-        if self.owner.ne(owner) { 
-            return Err(trace("Account has invalid owner",  ProgramError::InvalidAccountOwner));
+        if self.owner.ne(owner) {
+            return Err(trace(
+                "Account has invalid owner",
+                ProgramError::InvalidAccountOwner,
+            ));
         }
         Ok(self)
     }
@@ -85,8 +105,11 @@ impl AccountInfoValidation for AccountInfo<'_> {
     #[track_caller]
     fn has_seeds(&self, seeds: &[&[u8]], program_id: &Pubkey) -> Result<&Self, ProgramError> {
         let pda = Pubkey::find_program_address(seeds, program_id);
-        if self.key.ne(&pda.0) { 
-            return Err(trace("Account has invalid seeds",  ProgramError::InvalidSeeds));
+        if self.key.ne(&pda.0) {
+            return Err(trace(
+                "Account has invalid seeds",
+                ProgramError::InvalidSeeds,
+            ));
         }
         Ok(self)
     }
@@ -99,7 +122,7 @@ impl AsAccount for AccountInfo<'_> {
         T: AccountDeserialize + Discriminator + Pod,
     {
         unsafe {
-            // Validate account owner.  
+            // Validate account owner.
             self.has_owner(program_id)?;
 
             // Validate account data length.
@@ -110,10 +133,7 @@ impl AsAccount for AccountInfo<'_> {
             }
 
             // Deserialize account data.
-            T::try_from_bytes(std::slice::from_raw_parts(
-                data.as_ptr(),
-                expected_len,
-            ))
+            T::try_from_bytes(std::slice::from_raw_parts(data.as_ptr(), expected_len))
         }
     }
 
@@ -134,12 +154,10 @@ impl AsAccount for AccountInfo<'_> {
             }
 
             // Deserialize account data.
-            T::try_from_bytes_mut(
-                std::slice::from_raw_parts_mut(
-                    data.as_mut_ptr(),
-                    expected_len,
-                )
-            )
+            T::try_from_bytes_mut(std::slice::from_raw_parts_mut(
+                data.as_mut_ptr(),
+                expected_len,
+            ))
         }
     }
 }
@@ -175,46 +193,42 @@ impl<'a, 'info> CloseAccount<'a, 'info> for AccountInfo<'info> {
 #[cfg(feature = "spl")]
 impl AsSplToken for AccountInfo<'_> {
     #[track_caller]
-    fn as_mint(&self) -> Result<spl_token::state::Mint, ProgramError> {
+    fn as_mint(&self) -> Result<spl_token_2022::state::Mint, ProgramError> {
         unsafe {
             // Validate account owner.
-            self.has_owner(&spl_token::ID)?;
+            self.has_owner(&spl_token_2022::ID)?;
 
             // Validate account data length.
             let data = self.try_borrow_data()?;
-            if data.len() != spl_token::state::Mint::LEN {
+            if data.len() != spl_token_2022::state::Mint::LEN {
                 return Err(ProgramError::InvalidAccountData);
             }
 
             // Deserialize account data.
-            spl_token::state::Mint::unpack(
-                std::slice::from_raw_parts(
-                    data.as_ptr(),
-                    spl_token::state::Mint::LEN,
-                )
-            )
+            spl_token_2022::state::Mint::unpack(std::slice::from_raw_parts(
+                data.as_ptr(),
+                spl_token_2022::state::Mint::LEN,
+            ))
         }
     }
 
     #[track_caller]
-    fn as_token_account(&self) -> Result<spl_token::state::Account, ProgramError> {
+    fn as_token_account(&self) -> Result<spl_token_2022::state::Account, ProgramError> {
         unsafe {
             // Validate account owner.
-            self.has_owner(&spl_token::ID)?;
+            self.has_owner(&spl_token_2022::ID)?;
 
             // Validate account data length.
             let data = self.try_borrow_data()?;
-            if data.len() != spl_token::state::Account::LEN {
+            if data.len() != spl_token_2022::state::Account::LEN {
                 return Err(ProgramError::InvalidAccountData);
             }
 
             // Deserialize account data.
-            spl_token::state::Account::unpack(
-                std::slice::from_raw_parts(
-                    data.as_ptr(),
-                    spl_token::state::Account::LEN,
-                )
-            )
+            spl_token_2022::state::Account::unpack(std::slice::from_raw_parts(
+                data.as_ptr(),
+                spl_token_2022::state::Account::LEN,
+            ))
         }
     }
 
@@ -223,7 +237,7 @@ impl AsSplToken for AccountInfo<'_> {
         &self,
         owner: &Pubkey,
         mint: &Pubkey,
-    ) -> Result<spl_token::state::Account, ProgramError> {
+    ) -> Result<spl_token_2022::state::Account, ProgramError> {
         self.has_address(&spl_associated_token_account::get_associated_token_address(
             owner, mint,
         ))?
@@ -232,7 +246,7 @@ impl AsSplToken for AccountInfo<'_> {
 }
 
 #[cfg(feature = "spl")]
-impl AccountValidation for spl_token::state::Mint {
+impl AccountValidation for spl_token_2022::state::Mint {
     #[track_caller]
     fn assert<F>(&self, condition: F) -> Result<&Self, ProgramError>
     where
@@ -303,7 +317,7 @@ impl AccountValidation for spl_token::state::Mint {
 }
 
 #[cfg(feature = "spl")]
-impl AccountValidation for spl_token::state::Account {
+impl AccountValidation for spl_token_2022::state::Account {
     #[track_caller]
     fn assert<F>(&self, condition: F) -> Result<&Self, ProgramError>
     where

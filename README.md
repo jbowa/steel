@@ -254,7 +254,7 @@ pub fn process_transfer(accounts: &[AccountInfo<'_>], _data: &[u8]) -> ProgramRe
         .as_token_account()?
         .assert(|t| t.mint == *mint_info.key)?;
 
-    token_program.is_program(&spl_token::ID)?;
+    token_program.is_program(&spl_token_2022::ID)?;
 
     transfer(
         signer_info,

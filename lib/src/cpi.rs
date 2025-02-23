@@ -243,7 +243,7 @@ pub fn create_associated_token_account<'info>(
             funder_info.key,
             owner_info.key,
             mint_info.key,
-            &spl_token::ID,
+            &spl_token_2022::ID,
         ),
         &[
             funder_info.clone(),
@@ -266,8 +266,8 @@ pub fn close_token_account<'info>(
     token_program: &AccountInfo<'info>,
 ) -> ProgramResult {
     solana_program::program::invoke(
-        &spl_token::instruction::close_account(
-            &spl_token::ID,
+        &spl_token_2022::instruction::close_account(
+            &spl_token_2022::ID,
             &account_info.key,
             &destination_info.key,
             &owner_info.key,
@@ -313,8 +313,8 @@ pub fn close_token_account_signed_with_bump<'info>(
     bump: u8,
 ) -> ProgramResult {
     invoke_signed_with_bump(
-        &spl_token::instruction::close_account(
-            &spl_token::ID,
+        &spl_token_2022::instruction::close_account(
+            &spl_token_2022::ID,
             &account_info.key,
             &destination_info.key,
             &owner_info.key,
@@ -341,8 +341,8 @@ pub fn transfer<'info>(
     amount: u64,
 ) -> ProgramResult {
     solana_program::program::invoke(
-        &spl_token::instruction::transfer(
-            &spl_token::ID,
+        &spl_token_2022::instruction::transfer(
+            &spl_token_2022::ID,
             from_info.key,
             to_info.key,
             authority_info.key,
@@ -392,8 +392,8 @@ pub fn transfer_signed_with_bump<'info>(
     bump: u8,
 ) -> ProgramResult {
     invoke_signed_with_bump(
-        &spl_token::instruction::transfer(
-            &spl_token::ID,
+        &spl_token_2022::instruction::transfer(
+            &spl_token_2022::ID,
             from_info.key,
             to_info.key,
             authority_info.key,
@@ -423,8 +423,8 @@ pub fn transfer_checked<'info>(
     decimals: u8,
 ) -> ProgramResult {
     solana_program::program::invoke(
-        &spl_token::instruction::transfer_checked(
-            &spl_token::ID,
+        &spl_token_2022::instruction::transfer_checked(
+            &spl_token_2022::ID,
             from_info.key,
             mint_info.key,
             to_info.key,
@@ -483,8 +483,8 @@ pub fn transfer_checked_signed_with_bump<'info>(
     bump: u8,
 ) -> ProgramResult {
     invoke_signed_with_bump(
-        &spl_token::instruction::transfer_checked(
-            &spl_token::ID,
+        &spl_token_2022::instruction::transfer_checked(
+            &spl_token_2022::ID,
             from_info.key,
             mint_info.key,
             to_info.key,
@@ -539,8 +539,8 @@ pub fn mint_to_signed_with_bump<'info>(
     bump: u8,
 ) -> ProgramResult {
     invoke_signed_with_bump(
-        &spl_token::instruction::mint_to(
-            &spl_token::ID,
+        &spl_token_2022::instruction::mint_to(
+            &spl_token_2022::ID,
             mint_info.key,
             to_info.key,
             authority_info.key,
@@ -595,14 +595,14 @@ pub fn mint_to_checked_signed_with_bump<'info>(
     bump: u8,
 ) -> ProgramResult {
     invoke_signed_with_bump(
-        &spl_token::instruction::mint_to_checked(
-            &spl_token::ID,
+        &spl_token_2022::instruction::mint_to_checked(
+            &spl_token_2022::ID,
             mint_info.key,
             to_info.key,
             authority_info.key,
             &[authority_info.key],
             amount,
-            decimals
+            decimals,
         )?,
         &[
             token_program.clone(),
@@ -625,8 +625,8 @@ pub fn burn<'info>(
     amount: u64,
 ) -> ProgramResult {
     solana_program::program::invoke(
-        &spl_token::instruction::burn(
-            &spl_token::ID,
+        &spl_token_2022::instruction::burn(
+            &spl_token_2022::ID,
             token_account_info.key,
             mint_info.key,
             authority_info.key,
@@ -676,8 +676,8 @@ pub fn burn_signed_with_bump<'info>(
     bump: u8,
 ) -> ProgramResult {
     invoke_signed_with_bump(
-        &spl_token::instruction::burn(
-            &spl_token::ID,
+        &spl_token_2022::instruction::burn(
+            &spl_token_2022::ID,
             token_account_info.key,
             mint_info.key,
             authority_info.key,
@@ -706,14 +706,14 @@ pub fn burn_checked<'info>(
     decimals: u8,
 ) -> ProgramResult {
     solana_program::program::invoke(
-        &spl_token::instruction::burn_checked(
-            &spl_token::ID,
+        &spl_token_2022::instruction::burn_checked(
+            &spl_token_2022::ID,
             token_account_info.key,
             mint_info.key,
             authority_info.key,
             &[authority_info.key],
             amount,
-            decimals
+            decimals,
         )?,
         &[
             token_program.clone(),
@@ -761,14 +761,14 @@ pub fn burn_checked_signed_with_bump<'info>(
     bump: u8,
 ) -> ProgramResult {
     invoke_signed_with_bump(
-        &spl_token::instruction::burn_checked(
-            &spl_token::ID,
+        &spl_token_2022::instruction::burn_checked(
+            &spl_token_2022::ID,
             token_account_info.key,
             mint_info.key,
             authority_info.key,
             &[authority_info.key],
             amount,
-            decimals
+            decimals,
         )?,
         &[
             token_program.clone(),
@@ -791,8 +791,8 @@ pub fn freeze<'info>(
     token_program: &AccountInfo<'info>,
 ) -> ProgramResult {
     solana_program::program::invoke(
-        &spl_token::instruction::freeze_account(
-            &spl_token::ID,
+        &spl_token_2022::instruction::freeze_account(
+            &spl_token_2022::ID,
             account_info.key,
             mint_info.key,
             owner_info.key,
@@ -842,8 +842,8 @@ pub fn freeze_signed_with_bump<'info>(
     bump: u8,
 ) -> ProgramResult {
     invoke_signed_with_bump(
-        &spl_token::instruction::freeze_account(
-            &spl_token::ID,
+        &spl_token_2022::instruction::freeze_account(
+            &spl_token_2022::ID,
             account_info.key,
             mint_info.key,
             owner_info.key,
@@ -872,8 +872,8 @@ pub fn initialize_mint<'info>(
     decimals: u8,
 ) -> ProgramResult {
     solana_program::program::invoke(
-        &spl_token::instruction::initialize_mint(
-            &spl_token::ID,
+        &spl_token_2022::instruction::initialize_mint(
+            &spl_token_2022::ID,
             mint_info.key,
             mint_authority_info.key,
             freeze_authority_info.map(|i| i.key),
@@ -925,8 +925,8 @@ pub fn initialize_mint_signed_with_bump<'info>(
     bump: u8,
 ) -> ProgramResult {
     invoke_signed_with_bump(
-        &spl_token::instruction::initialize_mint(
-            &spl_token::ID,
+        &spl_token_2022::instruction::initialize_mint(
+            &spl_token_2022::ID,
             mint_info.key,
             mint_authority_info.key,
             freeze_authority_info.map(|i| i.key),
@@ -954,8 +954,8 @@ pub fn thaw_account<'info>(
     token_program: &AccountInfo<'info>,
 ) -> ProgramResult {
     solana_program::program::invoke(
-        &spl_token::instruction::thaw_account(
-            &spl_token::id(),
+        &spl_token_2022::instruction::thaw_account(
+            &spl_token_2022::id(),
             token_account_info.key,
             mint_info.key,
             authority_info.key,
@@ -1006,8 +1006,8 @@ pub fn thaw_account_signed_with_bump<'info>(
     bump: u8,
 ) -> ProgramResult {
     invoke_signed_with_bump(
-        &spl_token::instruction::thaw_account(
-            &spl_token::id(),
+        &spl_token_2022::instruction::thaw_account(
+            &spl_token_2022::id(),
             token_account_info.key,
             mint_info.key,
             owner_info.key,
@@ -1033,12 +1033,12 @@ pub fn set_authority<'info>(
     account_or_mint: &AccountInfo<'info>,
     authority_info: &AccountInfo<'info>,
     new_authority_info: Option<&AccountInfo<'info>>,
-    authority_type: spl_token::instruction::AuthorityType,
+    authority_type: spl_token_2022::instruction::AuthorityType,
     token_program: &AccountInfo<'info>,
 ) -> ProgramResult {
     solana_program::program::invoke(
-        &spl_token::instruction::set_authority(
-            &spl_token::id(),
+        &spl_token_2022::instruction::set_authority(
+            &spl_token_2022::id(),
             account_or_mint.key,
             new_authority_info.map(|i| i.key),
             authority_type,
@@ -1061,7 +1061,7 @@ pub fn set_authority_signed<'info>(
     account_or_mint: &AccountInfo<'info>,
     authority_info: &AccountInfo<'info>,
     new_authority_info: Option<&AccountInfo<'info>>,
-    authority_type: spl_token::instruction::AuthorityType,
+    authority_type: spl_token_2022::instruction::AuthorityType,
     token_program: &AccountInfo<'info>,
     seeds: &[&[u8]],
 ) -> ProgramResult {
@@ -1083,14 +1083,14 @@ pub fn set_authority_signed_with_bump<'info>(
     account_or_mint: &AccountInfo<'info>,
     authority_info: &AccountInfo<'info>,
     new_authority_info: Option<&AccountInfo<'info>>,
-    authority_type: spl_token::instruction::AuthorityType,
+    authority_type: spl_token_2022::instruction::AuthorityType,
     token_program: &AccountInfo<'info>,
     seeds: &[&[u8]],
     bump: u8,
 ) -> ProgramResult {
     invoke_signed_with_bump(
-        &spl_token::instruction::set_authority(
-            &spl_token::id(),
+        &spl_token_2022::instruction::set_authority(
+            &spl_token_2022::id(),
             account_or_mint.key,
             new_authority_info.map(|i| i.key),
             authority_type,
@@ -1117,8 +1117,8 @@ pub fn revoke<'info>(
     token_program: &AccountInfo<'info>,
 ) -> ProgramResult {
     solana_program::program::invoke(
-        &spl_token::instruction::revoke(
-            &spl_token::id(),
+        &spl_token_2022::instruction::revoke(
+            &spl_token_2022::id(),
             source_info.key,
             authority_info.key,
             &[authority_info.key],
@@ -1142,13 +1142,7 @@ pub fn revoke_signed<'info>(
     seeds: &[&[u8]],
 ) -> ProgramResult {
     let bump = Pubkey::find_program_address(seeds, authority_info.owner).1;
-    revoke_signed_with_bump(
-        source_info, 
-        authority_info,
-        token_program, 
-        seeds, 
-        bump
-    )
+    revoke_signed_with_bump(source_info, authority_info, token_program, seeds, bump)
 }
 
 #[cfg(feature = "spl")]
@@ -1161,8 +1155,8 @@ pub fn revoke_signed_with_bump<'info>(
     bump: u8,
 ) -> ProgramResult {
     invoke_signed_with_bump(
-        &spl_token::instruction::revoke(
-            &spl_token::id(),
+        &spl_token_2022::instruction::revoke(
+            &spl_token_2022::id(),
             source_info.key,
             authority_info.key,
             &[authority_info.key],
@@ -1182,160 +1176,157 @@ pub fn revoke_signed_with_bump<'info>(
 #[cfg(feature = "spl")]
 #[inline(always)]
 pub fn approve<'info>(
-    source_info : &AccountInfo<'info>,
-    delegate_info:&AccountInfo<'info>,
+    source_info: &AccountInfo<'info>,
+    delegate_info: &AccountInfo<'info>,
     owner_info: &AccountInfo<'info>,
     signer_info: &AccountInfo<'info>,
     token_program: &AccountInfo<'info>,
     amount: u64,
 ) -> ProgramResult {
     solana_program::program::invoke(
-        &spl_token::instruction::approve(
-        &spl_token::ID,
-        source_info.key,
-        delegate_info.key,
-        owner_info.key,
-        &[signer_info.key],
-        amount
-    )?, 
-    &[
-     token_program.clone(),
-     source_info.clone(),
-     delegate_info.clone(),
-     owner_info.clone(),
-     signer_info.clone()
-    ]
-  )
+        &spl_token_2022::instruction::approve(
+            &spl_token_2022::ID,
+            source_info.key,
+            delegate_info.key,
+            owner_info.key,
+            &[signer_info.key],
+            amount,
+        )?,
+        &[
+            token_program.clone(),
+            source_info.clone(),
+            delegate_info.clone(),
+            owner_info.clone(),
+            signer_info.clone(),
+        ],
+    )
 }
 
 #[cfg(feature = "spl")]
 #[inline(always)]
 pub fn approve_signed<'info>(
-    source_info : &AccountInfo<'info>,
-    delegate_info:&AccountInfo<'info>,
+    source_info: &AccountInfo<'info>,
+    delegate_info: &AccountInfo<'info>,
     token_program: &AccountInfo<'info>,
     amount: u64,
-    seeds:&[&[u8]]
+    seeds: &[&[u8]],
 ) -> ProgramResult {
-    let bump = Pubkey::find_program_address(seeds, &spl_token::ID).1;
+    let bump = Pubkey::find_program_address(seeds, &spl_token_2022::ID).1;
     approve_signed_with_bump(
         source_info,
         delegate_info,
         token_program,
         amount,
         seeds,
-        bump
+        bump,
     )
 }
 
 #[cfg(feature = "spl")]
 #[inline(always)]
 pub fn approve_signed_with_bump<'info>(
-    source_info : &AccountInfo<'info>,
-    delegate_info:&AccountInfo<'info>,
+    source_info: &AccountInfo<'info>,
+    delegate_info: &AccountInfo<'info>,
     token_program: &AccountInfo<'info>,
     amount: u64,
     seeds: &[&[u8]],
-    bump:u8
+    bump: u8,
 ) -> ProgramResult {
-   invoke_signed_with_bump(
-        &spl_token::instruction::approve(
-        &spl_token::ID,
-        source_info.key,
-        delegate_info.key,
-        delegate_info.key,
-        &[delegate_info.key],
-        amount
-    )?, 
-    &[
-     token_program.clone(),
-     source_info.clone(),
-     delegate_info.clone(),
-    ],
-    seeds,
-    bump
-  )
+    invoke_signed_with_bump(
+        &spl_token_2022::instruction::approve(
+            &spl_token_2022::ID,
+            source_info.key,
+            delegate_info.key,
+            delegate_info.key,
+            &[delegate_info.key],
+            amount,
+        )?,
+        &[
+            token_program.clone(),
+            source_info.clone(),
+            delegate_info.clone(),
+        ],
+        seeds,
+        bump,
+    )
 }
 
 #[cfg(feature = "spl")]
 #[inline(always)]
 pub fn approve_checked<'info>(
-    source_info : &AccountInfo<'info>,
+    source_info: &AccountInfo<'info>,
     mint_info: &AccountInfo<'info>,
-    delegate_info:&AccountInfo<'info>,
+    delegate_info: &AccountInfo<'info>,
     token_program: &AccountInfo<'info>,
     amount: u64,
-    decimals: u8
+    decimals: u8,
 ) -> ProgramResult {
     solana_program::program::invoke(
-        &spl_token::instruction::approve_checked(
-        &spl_token::ID,
-        mint_info.key,
-        source_info.key,
-        delegate_info.key,
-        delegate_info.key,
-        &[delegate_info.key],
-        amount,
-        decimals
-    )?, 
-    &[
-     token_program.clone(),
-     mint_info.clone(),
-     source_info.clone(),
-     delegate_info.clone(),
-    ]
-  )
+        &spl_token_2022::instruction::approve_checked(
+            &spl_token_2022::ID,
+            mint_info.key,
+            source_info.key,
+            delegate_info.key,
+            delegate_info.key,
+            &[delegate_info.key],
+            amount,
+            decimals,
+        )?,
+        &[
+            token_program.clone(),
+            mint_info.clone(),
+            source_info.clone(),
+            delegate_info.clone(),
+        ],
+    )
 }
 
 #[cfg(feature = "spl")]
 #[inline(always)]
 pub fn approve_checked_signed<'info>(
-    source_info : &AccountInfo<'info>,
-    delegate_info:&AccountInfo<'info>,
-     token_program: &AccountInfo<'info>,
+    source_info: &AccountInfo<'info>,
+    delegate_info: &AccountInfo<'info>,
+    token_program: &AccountInfo<'info>,
     amount: u64,
-    seeds:&[&[u8]]
+    seeds: &[&[u8]],
 ) -> ProgramResult {
-    let bump = Pubkey::find_program_address(seeds, &spl_token::ID).1;
+    let bump = Pubkey::find_program_address(seeds, &spl_token_2022::ID).1;
     approve_signed_with_bump(
         source_info,
         delegate_info,
         token_program,
         amount,
         seeds,
-        bump
+        bump,
     )
 }
 
 #[cfg(feature = "spl")]
 #[inline(always)]
 pub fn approve_checked_signed_with_bump<'info>(
-    source_info : &AccountInfo<'info>,
+    source_info: &AccountInfo<'info>,
     mint_info: &AccountInfo<'info>,
-    delegate_info:&AccountInfo<'info>,
+    delegate_info: &AccountInfo<'info>,
     decimals: u8,
     amount: u64,
     seeds: &[&[u8]],
-    bump:u8
+    bump: u8,
 ) -> ProgramResult {
-   invoke_signed_with_bump(
-        &spl_token::instruction::approve_checked(
-        &spl_token::ID,
-        source_info.key,
-        mint_info.key,
-        delegate_info.key,
-        delegate_info.key,
-        &[delegate_info.key],
-        amount,
-        decimals
-    )?, 
-    &[
-     source_info.clone(),
-     delegate_info.clone(),
-    ],
-    seeds,
-    bump
-  )
+    invoke_signed_with_bump(
+        &spl_token_2022::instruction::approve_checked(
+            &spl_token_2022::ID,
+            source_info.key,
+            mint_info.key,
+            delegate_info.key,
+            delegate_info.key,
+            &[delegate_info.key],
+            amount,
+            decimals,
+        )?,
+        &[source_info.clone(), delegate_info.clone()],
+        seeds,
+        bump,
+    )
 }
 
 /// Initializes a multisignature account with N provided signers.
@@ -1345,20 +1336,17 @@ pub fn initialize_multisig<'info>(
     multisig_info: &AccountInfo<'info>,
     signer_info: &AccountInfo<'info>,
     token_program: &AccountInfo<'info>,
-    n: u8
+    n: u8,
 ) -> ProgramResult {
     solana_program::program::invoke(
-        &spl_token::instruction::initialize_multisig(
-        &spl_token::ID,
-        multisig_info.key,
-        &[signer_info.key],
-        n
-    )?, 
-    &[
-     token_program.clone(),
-     signer_info.clone()
-    ]
-  )
+        &spl_token_2022::instruction::initialize_multisig(
+            &spl_token_2022::ID,
+            multisig_info.key,
+            &[signer_info.key],
+            n,
+        )?,
+        &[token_program.clone(), signer_info.clone()],
+    )
 }
 
 #[cfg(feature = "spl")]
@@ -1367,18 +1355,11 @@ pub fn initialize_multisig_signed<'info>(
     multisig_info: &AccountInfo<'info>,
     signer_info: &AccountInfo<'info>,
     token_program: &AccountInfo<'info>,
-    m: u8, // number of multi signtures 
-    seeds:&[&[u8]]
+    m: u8, // number of multi signtures
+    seeds: &[&[u8]],
 ) -> ProgramResult {
-    let bump = Pubkey::find_program_address(seeds, &spl_token::ID).1;
-    initialize_multisig_signed_with_bump(
-        multisig_info,
-        signer_info,
-        token_program,
-        m,
-        seeds,
-        bump,
-    )
+    let bump = Pubkey::find_program_address(seeds, &spl_token_2022::ID).1;
+    initialize_multisig_signed_with_bump(multisig_info, signer_info, token_program, m, seeds, bump)
 }
 
 #[cfg(feature = "spl")]
@@ -1389,88 +1370,57 @@ pub fn initialize_multisig_signed_with_bump<'info>(
     token_program: &AccountInfo<'info>,
     m: u8,
     seeds: &[&[u8]],
-    bump:u8
+    bump: u8,
 ) -> ProgramResult {
-   invoke_signed_with_bump(
-        &spl_token::instruction::initialize_multisig(
-        &spl_token::ID,
-        multisig_info.key,
-        &[signer_info.key],
-        m,
-    )?, 
-    &[
-     token_program.clone(),
-     signer_info.clone()
-    ],
-    seeds,
-    bump
-  )
+    invoke_signed_with_bump(
+        &spl_token_2022::instruction::initialize_multisig(
+            &spl_token_2022::ID,
+            multisig_info.key,
+            &[signer_info.key],
+            m,
+        )?,
+        &[token_program.clone(), signer_info.clone()],
+        seeds,
+        bump,
+    )
 }
 
 ///Like InitializeAccount2, but does not require the Rent sysvar to be provided
 #[cfg(feature = "spl")]
 #[inline(always)]
-pub fn sync_native(
-    account_info: &AccountInfo
-) -> ProgramResult {
+pub fn sync_native(account_info: &AccountInfo) -> ProgramResult {
     solana_program::program::invoke(
-        &spl_token::instruction::sync_native(
-            &spl_token::ID, 
-            account_info.key
-        )?,
-        &[
-         account_info.clone()
-        ]
+        &spl_token_2022::instruction::sync_native(&spl_token_2022::ID, account_info.key)?,
+        &[account_info.clone()],
     )
 }
 
 #[cfg(feature = "spl")]
 #[inline(always)]
-pub fn sync_native_signed(
-    account_info: &AccountInfo,
-    seeds: &[&[u8]],
-) -> ProgramResult {
-    let bump = Pubkey::find_program_address(seeds, &spl_token::ID).1;
-    sync_native_signed_with_bump(
-        account_info, 
-        seeds, 
-        bump
-    )
+pub fn sync_native_signed(account_info: &AccountInfo, seeds: &[&[u8]]) -> ProgramResult {
+    let bump = Pubkey::find_program_address(seeds, &spl_token_2022::ID).1;
+    sync_native_signed_with_bump(account_info, seeds, bump)
 }
 #[cfg(feature = "spl")]
 #[inline(always)]
 pub fn sync_native_signed_with_bump(
     account_info: &AccountInfo,
     seeds: &[&[u8]],
-    bump: u8
+    bump: u8,
 ) -> ProgramResult {
-  invoke_signed_with_bump(
-        &spl_token::instruction::sync_native(
-            &spl_token::ID, 
-            account_info.key,
-        )?,
-        &[
-         account_info.clone()
-        ],
+    invoke_signed_with_bump(
+        &spl_token_2022::instruction::sync_native(&spl_token_2022::ID, account_info.key)?,
+        &[account_info.clone()],
         seeds,
-        bump
+        bump,
     )
 }
 
 #[cfg(feature = "spl")]
 #[inline(always)]
-pub fn get_account_data_size(
-    mint_info: &AccountInfo
-) -> ProgramResult {
+pub fn get_account_data_size(mint_info: &AccountInfo) -> ProgramResult {
     solana_program::program::invoke(
-        &spl_token::instruction::get_account_data_size(
-            &spl_token::ID, 
-            mint_info.key
-        )?,
-        &[
-         mint_info.clone()
-        ]
+        &spl_token_2022::instruction::get_account_data_size(&spl_token_2022::ID, mint_info.key)?,
+        &[mint_info.clone()],
     )
 }
-
-
