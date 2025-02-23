@@ -36,7 +36,4 @@ toml = "0.8.19"
 serde_json = "1.0.137"
 
 [patch.crates-io]
-spl-token-2022 = { git = "https://github.com/solana-program/token-2022", branch = "main" }
-spl-associated-token-account = { git = "https://github.com/solana-program/associated-token-account", branch = "main" }
-solana-zk-sdk = { git = "https://github.com/anza-xyz/agave", branch = "master" }
-spl-token-confidential-transfer-proof-generation = { git = "https://github.com/solana-program/token-2022", branch = "main" }
+spl-token-2022 = { git = "https://github.com/jbowa/token-2022", branch = "main" }
