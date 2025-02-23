@@ -12,7 +12,7 @@ keywords.workspace = true
 
 [features]
 deafult = []
-spl = ["spl-token-2022", "spl-associated-token-account", "solana-zk-sdk", "spl-token-confidential-transfer-proof-generation"]
+spl = ["spl-token-2022", "spl-associated-token-account"]
 
 [dependencies]
 bytemuck.workspace = true
