@@ -12,7 +12,7 @@ keywords.workspace = true
 
 [features]
 deafult = []
-spl = ["spl-token-2022", "spl-associated-token-account"]
+spl = ["spl-token-2022", "spl-associated-token-account", "solana-zk-sdk", "spl-token-confidential-transfer-proof-generation"]
 
 [dependencies]
 bytemuck.workspace = true
@@ -22,3 +22,6 @@ spl-token-2022 = { workspace = true, optional = true }
 spl-associated-token-account = { workspace = true, optional = true }
 thiserror.workspace = true
 
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+solana-zk-sdk = { git = "https://github.com/anza-xyz/agave", branch = "master", optional = true }
+spl-token-confidential-transfer-proof-generation = { git = "https://github.com/solana-program/token-2022", branch = "main", optional = true }
