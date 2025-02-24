@@ -943,9 +943,9 @@ dependencies = [
 
 [[package]]
 name = "either"
-version = "1.13.0"
+version = "1.14.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "60b1af1c220855b6ceac025d3f6ecdd2b7c4894bfe9cd9bda4fbb4bc7c0d4cf0"
+checksum = "b7914353092ddf589ad78f25c5c1c21b7f80b0ff8621e7c814c3485b5306da9d"
 
 [[package]]
 name = "encode_unicode"
@@ -3876,7 +3876,7 @@ dependencies = [
 [[package]]
 name = "solana-zk-sdk"
 version = "2.3.0"
-source = "git+https://github.com/anza-xyz/agave?branch=master#4f9ad7a42b14ed681fb6412c104b3df5c310d50f"
+source = "git+https://github.com/anza-xyz/agave?branch=master#92b11cd2eef1d3f5434d6af702f7d7a85ffcfca9"
 dependencies = [
  "aes-gcm-siv",
  "base64 0.22.1",
@@ -4017,7 +4017,19 @@ dependencies = [
  "solana-program",
  "solana-zk-sdk 2.2.0",
  "spl-pod",
- "spl-token-confidential-transfer-proof-extraction",
+ "spl-token-confidential-transfer-proof-extraction 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "spl-elgamal-registry"
+version = "0.1.1"
+source = "git+https://github.com/jbowa/token-2022?branch=main#14c51a6be1192d006a3bb2b6340c9197bdd1fa9d"
+dependencies = [
+ "bytemuck",
+ "solana-program",
+ "solana-zk-sdk 2.2.0",
+ "spl-pod",
+ "spl-token-confidential-transfer-proof-extraction 0.2.1 (git+https://github.com/jbowa/token-2022?branch=main)",
 ]
 
 [[package]]
@@ -4130,12 +4142,12 @@ dependencies = [
  "solana-program",
  "solana-security-txt",
  "solana-zk-sdk 2.2.0",
- "spl-elgamal-registry",
+ "spl-elgamal-registry 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "spl-memo",
  "spl-pod",
  "spl-token",
- "spl-token-confidential-transfer-ciphertext-arithmetic",
- "spl-token-confidential-transfer-proof-extraction",
+ "spl-token-confidential-transfer-ciphertext-arithmetic 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "spl-token-confidential-transfer-proof-extraction 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "spl-token-confidential-transfer-proof-generation 0.2.0",
  "spl-token-group-interface",
  "spl-token-metadata-interface",
@@ -4147,7 +4159,7 @@ dependencies = [
 [[package]]
 name = "spl-token-2022"
 version = "7.0.0"
-source = "git+https://github.com/jbowa/token-2022?branch=main#230a37be26da0e8392a6639e74d7d8fc1fcd91d1"
+source = "git+https://github.com/jbowa/token-2022?branch=main#14c51a6be1192d006a3bb2b6340c9197bdd1fa9d"
 dependencies = [
  "arrayref",
  "bytemuck",
@@ -4157,9 +4169,12 @@ dependencies = [
  "solana-program",
  "solana-security-txt",
  "solana-zk-sdk 2.2.0",
+ "spl-elgamal-registry 0.1.1 (git+https://github.com/jbowa/token-2022?branch=main)",
  "spl-memo",
  "spl-pod",
  "spl-token",
+ "spl-token-confidential-transfer-ciphertext-arithmetic 0.2.1 (git+https://github.com/jbowa/token-2022?branch=main)",
+ "spl-token-confidential-transfer-proof-extraction 0.2.1 (git+https://github.com/jbowa/token-2022?branch=main)",
  "spl-token-confidential-transfer-proof-generation 0.3.0 (git+https://github.com/jbowa/token-2022?branch=main)",
  "spl-token-group-interface",
  "spl-token-metadata-interface",
@@ -4181,10 +4196,34 @@ dependencies = [
 ]
 
 [[package]]
+name = "spl-token-confidential-transfer-ciphertext-arithmetic"
+version = "0.2.1"
+source = "git+https://github.com/jbowa/token-2022?branch=main#14c51a6be1192d006a3bb2b6340c9197bdd1fa9d"
+dependencies = [
+ "base64 0.22.1",
+ "bytemuck",
+ "solana-curve25519",
+ "solana-zk-sdk 2.2.0",
+]
+
+[[package]]
 name = "spl-token-confidential-transfer-proof-extraction"
 version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "eff2d6a445a147c9d6dd77b8301b1e116c8299601794b558eafa409b342faf96"
+dependencies = [
+ "bytemuck",
+ "solana-curve25519",
+ "solana-program",
+ "solana-zk-sdk 2.2.0",
+ "spl-pod",
+ "thiserror 2.0.11",
+]
+
+[[package]]
+name = "spl-token-confidential-transfer-proof-extraction"
+version = "0.2.1"
+source = "git+https://github.com/jbowa/token-2022?branch=main#14c51a6be1192d006a3bb2b6340c9197bdd1fa9d"
 dependencies = [
  "bytemuck",
  "solana-curve25519",
@@ -4208,7 +4247,7 @@ dependencies = [
 [[package]]
 name = "spl-token-confidential-transfer-proof-generation"
 version = "0.3.0"
-source = "git+https://github.com/jbowa/token-2022?branch=main#230a37be26da0e8392a6639e74d7d8fc1fcd91d1"
+source = "git+https://github.com/jbowa/token-2022?branch=main#14c51a6be1192d006a3bb2b6340c9197bdd1fa9d"
 dependencies = [
  "curve25519-dalek 4.1.3",
  "solana-zk-sdk 2.2.0",
